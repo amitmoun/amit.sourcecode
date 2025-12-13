@@ -59,24 +59,37 @@ export default function AIChat() {
         }
     };
 
-    // Parser to highlight metrics
+    // Parser to highlight metrics and Markdown bold
     const formatContent = (text) => {
-        // Regex to find numbers with % or "hours" or "hired" context, roughly
-        // Matches: 30%, 25 hours, 100 people etc.
         if (!text || typeof text !== 'string') return null;
 
-        const parts = text.split(/(\d+(?:%|\+| hours| candidates| hires| days)?)/g);
+        // Split by simple Markdown bold syntax (**text**)
+        // Capture group includes the delimiters for easier processing? 
+        // Actually, let's just split by the bold markers and iterate.
+        // We will do a 2-pass approach: 1. Split by Bold, 2. Split by Metric
 
-        return parts.map((part, i) => {
-            if (/\d/.test(part) && part.length < 15) { // Simple heuristic for metric-like snippets
-                return (
-                    <span key={i} className={styles.highlightMetric}>
-                        {part}
-                        <span className={styles.checkIcon}>✓</span>
-                    </span>
-                );
+        const boldParts = text.split(/(\*\*.*?\*\*)/g);
+
+        return boldParts.map((boldPart, i) => {
+            if (boldPart.startsWith('**') && boldPart.endsWith('**')) {
+                // This is a bold chunk, remove stars and render strong
+                const content = boldPart.slice(2, -2);
+                return <strong key={i} style={{ color: '#fff' }}>{content}</strong>;
             }
-            return part;
+
+            // If not bold, process for metrics as before
+            const metricParts = boldPart.split(/(\d+(?:%|\+| hours| candidates| hires| days)?)/g);
+            return metricParts.map((part, j) => {
+                if (/\d/.test(part) && part.length < 15) {
+                    return (
+                        <span key={`${i}-${j}`} className={styles.highlightMetric}>
+                            {part}
+                            <span className={styles.checkIcon}>✓</span>
+                        </span>
+                    );
+                }
+                return part;
+            });
         });
     };
 
