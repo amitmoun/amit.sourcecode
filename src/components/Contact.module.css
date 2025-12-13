@@ -1,0 +1,112 @@
+.section {
+    padding: 6rem 1rem 8rem 1rem;
+    background-color: var(--background);
+    border-top: 1px solid var(--border);
+}
+
+/* Minimalist CTA Redesign */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Row wrapper */
+.iconRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Simple, muted icons */
+.iconLink {
+    color: #444;
+    /* Very muted */
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    background: transparent;
+    border: none;
+}
+
+/* Brand specific hovers */
+.linkedin:hover {
+    color: #0077b5 !important;
+}
+
+.email:hover {
+    color: #D44638 !important;
+}
+
+.iconLink:hover {
+    color: #fff;
+    /* Default fallback */
+    transform: none;
+    /* No scaling, just color change for minimalism */
+}
+
+.svgIcon {
+    width: 32px;
+    /* Upscaled from 24px */
+    height: 32px;
+}
+
+/* Center Breathing Text Link */
+.strategyLink {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 99px;
+    /* Pill shape */
+    background: rgba(255, 255, 255, 0.02);
+    animation: breathe 4s ease-in-out infinite;
+    transition: all 0.3s ease;
+    margin: 0 2rem;
+    letter-spacing: 0.05em;
+}
+
+.strategyLink:hover {
+    background: rgba(74, 222, 128, 0.05);
+    /* Subtle Green Tint */
+    border-color: rgba(74, 222, 128, 0.4);
+    /* Matching Border */
+    color: #4ade80;
+    /* System Green Text */
+    animation: none;
+    box-shadow: 0 0 20px rgba(74, 222, 128, 0.15);
+    /* Soft Green Glow */
+}
+
+@keyframes breathe {
+    0% {
+        opacity: 0.8;
+        box-shadow: 0 0 5px rgba(74, 222, 128, 0.2);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(74, 222, 128, 0.4), 0 0 10px rgba(74, 222, 128, 0.2);
+        /* Stronger double glow */
+        border-color: rgba(74, 222, 128, 0.6);
+        color: #4ade80;
+        text-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
+        /* Text glow */
+    }
+
+    100% {
+        opacity: 0.8;
+        box-shadow: 0 0 5px rgba(74, 222, 128, 0.2);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+}

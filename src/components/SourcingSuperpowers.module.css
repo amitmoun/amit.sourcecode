@@ -1,0 +1,161 @@
+.section {
+    padding: 6rem 1rem;
+    background-color: #050505;
+    /* Deep black/gray backbone */
+}
+
+.heading {
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    text-align: center;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+}
+
+.grid {
+    display: flex;
+    flex-direction: row;
+    /* Explicit row direction */
+    flex-wrap: nowrap;
+    /* Keep them in a line */
+    gap: 1rem;
+    /* Reduce gap to fit more */
+    width: 100%;
+    max-width: 1400px;
+    /* Allow more width */
+    margin: 0 auto;
+    justify-content: center;
+    /* Center the group */
+    padding: 0 1rem;
+}
+
+/* Custom Scrollbar for Webkit */
+/* .grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.grid::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border-radius: 4px;
+} */
+
+
+/* 3D Card Container */
+.cardContainer {
+    background-color: transparent;
+    flex: 1;
+    /* evenly distribute */
+    min-width: 0;
+    /* Allow shrinking */
+    height: 320px;
+    /* Fixed height for uniformity */
+    perspective: 1000px;
+    /* Essential for 3D effect */
+    cursor: pointer;
+}
+
+.cardInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Smooth impressive ease */
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+/* Flip on Hover */
+.cardContainer:hover .cardInner {
+    transform: rotateY(180deg);
+}
+
+/* Common Face Styles */
+.cardFront,
+.cardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid #222;
+}
+
+/* Front Styling */
+.cardFront {
+    background: linear-gradient(145deg, #111, #0a0a0a);
+    z-index: 2;
+}
+
+.cardFront:hover {
+    border-color: #333;
+}
+
+.icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+}
+
+.cardTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.tapHint {
+    margin-top: auto;
+    font-size: 0.75rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+}
+
+/* Back Styling */
+.cardBack {
+    transform: rotateY(180deg);
+    background: #151515;
+    /* Slightly lighter for readability */
+    border: 1px solid var(--foreground);
+    /* Highlight border on reveal */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.cardDescription {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ddd;
+    margin-bottom: 1.5rem;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.tag {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #ccc;
+    font-weight: 500;
+}
