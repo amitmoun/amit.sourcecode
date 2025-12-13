@@ -25,6 +25,9 @@ export default function AIChat() {
         if (!textToSend.trim() || isLoading) return;
 
         const userMessage = { role: 'user', content: textToSend };
+        // Create a new history array including the new message
+        const newMessages = [...messages, userMessage];
+
         setMessages(prev => [...prev, userMessage]);
         setInput('');
         setIsLoading(true);
@@ -33,14 +36,24 @@ export default function AIChat() {
             const res = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: textToSend })
+                // FIX: Server expects 'messages' array, not single 'message'
+                body: JSON.stringify({ messages: newMessages })
             });
 
+            if (!res.ok) {
+                // Handle non-200 responses (e.g., 500, 404)
+                throw new Error(`Server returned ${res.status}`);
+            }
+
             const data = await res.json();
-            setMessages(prev => [...prev, { role: 'assistant', content: data.content }]);
+
+            // Safety: Ensure content exists before using it
+            const aiContent = data.content || "I'm connected, but I received an empty response. Try asking something else.";
+
+            setMessages(prev => [...prev, { role: 'assistant', content: aiContent }]);
         } catch (error) {
             console.error('Chat error:', error);
-            setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, I'm having trouble connecting to my brain right now." }]);
+            setMessages(prev => [...prev, { role: 'assistant', content: "My connection is a bit unstable (Client-Side Error). Please try again in a moment." }]);
         } finally {
             setIsLoading(false);
         }
@@ -50,6 +63,8 @@ export default function AIChat() {
     const formatContent = (text) => {
         // Regex to find numbers with % or "hours" or "hired" context, roughly
         // Matches: 30%, 25 hours, 100 people etc.
+        if (!text || typeof text !== 'string') return null;
+
         const parts = text.split(/(\d+(?:%|\+| hours| candidates| hires| days)?)/g);
 
         return parts.map((part, i) => {
