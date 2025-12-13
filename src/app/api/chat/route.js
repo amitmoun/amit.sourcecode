@@ -12,8 +12,12 @@ export async function POST(req) {
         const lastMessage = messages[messages.length - 1];
         const query = lastMessage.content;
 
-        // Log the query asynchronously (fire and forget)
-        logToGoogleForm(query).catch(err => console.error("Logging failed", err));
+        // Log the query - await it to ensure Vercel doesn't kill the process before it finishes
+        try {
+            await logToGoogleForm(query);
+        } catch (err) {
+            console.error("Logging failed", err);
+        }
 
         // Log the question
         console.log(`[Question Log] ${new Date().toISOString()}: ${query}`);
