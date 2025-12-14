@@ -30,6 +30,39 @@
     padding: 0 1rem;
 }
 
+@media (max-width: 768px) {
+    .grid {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    .cardContainer {
+        flex: 1 1 100%;
+        /* Stack fully on mobile */
+        height: 280px;
+        /* Slightly shorter cards on mobile */
+    }
+
+    .section {
+        padding: 4rem 1rem;
+        /* Reduce top/bottom padding */
+    }
+
+    .heading {
+        margin-bottom: 2.5rem;
+        font-size: 2rem;
+    }
+
+    .cardInner {
+        transform: none !important;
+        /* Optional: Disable 3D flip on touch if desired, or keep it */
+    }
+
+    /* Ensure hover effect works on tap for mobile by defaulting to tap behavior if needed, 
+       but keeping hover logic is fine for modern mobile browsers that treat tap as hover. 
+       However, let's keep the flip logic as is, just ensuring layout fits. */
+}
+
 /* Custom Scrollbar for Webkit */
 /* .grid::-webkit-scrollbar {
     height: 8px;
