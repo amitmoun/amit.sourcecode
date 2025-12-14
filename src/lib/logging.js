@@ -24,9 +24,14 @@ export async function logToGoogleForm(message) {
 
     // Create form data payload
     const formData = new URLSearchParams();
-    formData.append(ENTRY_ID_QUERY, message);
+
+    // Robustness: Ensure keys start with "entry."
+    const queryKey = ENTRY_ID_QUERY.startsWith('entry.') ? ENTRY_ID_QUERY : `entry.${ENTRY_ID_QUERY}`;
+    formData.append(queryKey, message);
+
     if (ENTRY_ID_TIMESTAMP) {
-        formData.append(ENTRY_ID_TIMESTAMP, new Date().toISOString());
+        const timeKey = ENTRY_ID_TIMESTAMP.startsWith('entry.') ? ENTRY_ID_TIMESTAMP : `entry.${ENTRY_ID_TIMESTAMP}`;
+        formData.append(timeKey, new Date().toISOString());
     }
 
     try {
