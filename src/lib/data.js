@@ -45,12 +45,12 @@ export const projects = [
         }
     },
     {
-        title: "Principal Sourcing",
+        title: "Leadership Recruiting",
         subtitle: "engaging passive leadership",
         type: "impact_card",
         tags: ["Executive Search", "Events", "Sourcing"],
         content: {
-            problem: "Standard recruiting outreach yielded near-zero responses from passive, high-level Principal Engineers.",
+            problem: "Standard recruiting outreach yielded near-zero responses from passive, high-level Principal & Director level engineering leaders.",
             solution: "Replaced cold outreach with an invite-only 'Technical Summit.' Curated 50 top engineers, peers and leaders from engineering and product teams for peer-to-peer discussion instead of a sales pitch.",
             impact: "Generated 2 Principal-level finalists in one evening, effectively compressing months of traditional sourcing into 4 hours."
         }
