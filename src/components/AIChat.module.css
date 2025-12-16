@@ -29,15 +29,35 @@
     transform: translateY(-2px);
 }
 
-.statusIcon {
-    width: 12px;
-    height: 12px;
+
+
+.iconWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatIcon {
+    color: #4ade80;
+}
+
+.statusDotOnline {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
     background-color: #4ade80;
-    /* Neon Green */
     border-radius: 50%;
-    box-shadow: 0 0 10px rgba(74, 222, 128, 0.6);
+    border: 2px solid #000;
+    /* Contrast ring */
+    box-shadow: 0 0 5px #4ade80;
     animation: status-pulse 2s infinite ease-in-out;
 }
+
+/* Remove old statusIcon styles if unused, or keep for safety */
+/* .statusIcon { ... } */
 
 .btnTextCol {
     display: flex;

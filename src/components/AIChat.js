@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './AIChat.module.css';
-import SemanticAvatar from './SemanticAvatar';
+import { MessageSquare, Bot } from 'lucide-react'; // Changed imports
 
 export default function AIChat() {
     const [isOpen, setIsOpen] = useState(false);
@@ -97,9 +97,13 @@ export default function AIChat() {
         <div className={styles.container}>
             {!isOpen && (
                 <button className={styles.chatButton} onClick={() => setIsOpen(true)}>
-                    <div className={styles.statusIcon}></div>
+                    <div className={styles.iconWrapper}>
+                        <MessageSquare size={20} className={styles.chatIcon} />
+                        <span className={styles.statusDotOnline}></span>
+                    </div>
                     <div className={styles.btnTextCol}>
-                        <span className={styles.btnTitle}>Amit_Neural</span>
+                        <span className={styles.btnTitle}>Ask Amit_Neural</span>
+                        <span className={styles.btnSubtitle}>AI Agent Online</span>
                     </div>
                 </button>
             )}
@@ -112,7 +116,7 @@ export default function AIChat() {
                         <div className={styles.cardFront}>
                             <div className={styles.glassHeader}>
                                 <div className={styles.avatarWrapper}>
-                                    <SemanticAvatar isThinking={isLoading} />
+                                    <Bot size={24} color="#4ade80" />
                                 </div>
                                 <div className={styles.headerInfo}>
                                     <h3>Amit_Neural</h3>

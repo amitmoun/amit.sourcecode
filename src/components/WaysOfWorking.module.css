@@ -131,6 +131,25 @@
     transition: background 0.3s;
 }
 
+.rangeInput {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 40px;
+    /* Large touch target */
+    opacity: 0;
+    cursor: grab;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+}
+
+.rangeInput:active {
+    cursor: grabbing;
+}
+
 .sliderContainer:hover .track {
     background: #333;
 }
