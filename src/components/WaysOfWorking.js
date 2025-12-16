@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import styles from './WaysOfWorking.module.css';
 import { equalizerData } from '@/lib/data';
