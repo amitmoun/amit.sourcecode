@@ -128,20 +128,6 @@ export default function WaysOfWorking() {
                 move the sliders, and surface a precise hiring brief — shared in one link.
             </p>
 
-            <div className={styles.signalWrapper}>
-                <div className={styles.signalHeader}>
-                    <span className={styles.signalLabel}>Brief Clarity</span>
-                    <span className={styles.signalPct}>{Math.round(signalStrength)}%</span>
-                </div>
-                <div className={styles.signalTrack}>
-                    <div className={styles.signalBar} style={{ width: `${barWidth}%`, '--signal': signalStrength }} />
-                </div>
-                <p className={styles.signalHint}>{signalLabel}</p>
-                <p className={styles.signalMeta}>
-                    {confirmedCount} of {activeCount} active {activeCount === 1 ? 'axis' : 'axes'} confirmed
-                </p>
-            </div>
-
             <div className={styles.dashboardContainer}>
                 <div className={styles.dashboardContent}>
                     {equalizerData.map((item, index) => {
@@ -184,13 +170,28 @@ export default function WaysOfWorking() {
                 </div>
             </div>
 
-            {archetype && (
-                <div key={archetypeKey.current} className={styles.archetypePanel}>
-                    <span className={styles.archetypeEyebrow}>Role Profile</span>
-                    <p className={styles.archetypeHeadline}>{archetype.headline}</p>
-                    <p className={styles.archetypeSummary}>{archetype.summary}</p>
+            <div className={styles.resultsRow}>
+                {archetype && (
+                    <div key={archetypeKey.current} className={styles.archetypePanel}>
+                        <span className={styles.archetypeEyebrow}>Role Profile</span>
+                        <p className={styles.archetypeHeadline}>{archetype.headline}</p>
+                        <p className={styles.archetypeSummary}>{archetype.summary}</p>
+                    </div>
+                )}
+                <div className={styles.signalWrapper}>
+                    <div className={styles.signalHeader}>
+                        <span className={styles.signalLabel}>Brief Clarity</span>
+                        <span className={styles.signalPct}>{Math.round(signalStrength)}%</span>
+                    </div>
+                    <div className={styles.signalTrack}>
+                        <div className={styles.signalBar} style={{ width: `${barWidth}%` }} />
+                    </div>
+                    <p className={styles.signalHint}>{signalLabel}</p>
+                    <p className={styles.signalMeta}>
+                        {confirmedCount} of {activeCount} active {activeCount === 1 ? 'axis' : 'axes'} confirmed
+                    </p>
                 </div>
-            )}
+            </div>
 
             <div className={styles.copyRow}>
                 <button
