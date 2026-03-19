@@ -232,39 +232,53 @@ export const intakeStrategy = [
 
 export const equalizerData = [
     {
-        label: "Profile Type",
-        left: "Builder (0-1)",
-        right: "Scaler (1-N)",
-        value: 20, // Closer to Builder
-        caption: "High-ambiguity tolerance is critical for 0-1 growth, whereas enterprise stability is reserved for scaling."
+        id: 'execution',
+        label: "Execution Bias",
+        left: "Ships and Iterates",
+        right: "Architected First",
+        defaultValue: 50,
     },
     {
+        id: 'stage',
+        label: "System Stage",
+        left: "Builds from Scratch",
+        right: "Scales What Exists",
+        defaultValue: 50,
+    },
+    {
+        id: 'problem',
+        label: "Problem Definition",
+        left: "Requires Structured Parameters",
+        right: "Navigates High Ambiguity",
+        defaultValue: 50,
+    },
+    {
+        id: 'mindset',
+        label: "Cognitive Mindset",
+        left: "Craft-Driven",
+        right: "Outcome-Driven",
+        defaultValue: 50,
+    },
+    {
+        id: 'depth',
         label: "Technical Depth",
-        left: "Broad (T-Shaped)",
-        right: "Specialized (Deep)",
-        value: 75, // Closer to Specialized
-        caption: "Broad CS fundamentals trump specific framework knowledge for long-term engineering adaptability."
+        left: "Wide Range of Skills",
+        right: "Deep in One Domain",
+        defaultValue: 50,
     },
     {
-        label: "Bias for Action vs. Rigor",
-        left: "Ship Fast",
-        right: "Perfect Code",
-        value: 30, // Closer to Ship Fast
-        caption: "Assessment intensity is adjusted to favor velocity when time-to-market is the primary constraint."
+        id: 'influence',
+        label: "Influence Model",
+        left: "Builds Consensus",
+        right: "Drives Decisions",
+        defaultValue: 50,
     },
     {
-        label: "COLLABORATION MODEL",
-        left: "Autonomous Executor",
-        right: "Force Multiplier",
-        value: 80, // Closer to Force Multiplier
-        caption: "Distinguished that this role requires a 'Force Multiplier'—someone who spends 40% of their time unblocking juniors rather than just shipping individual tickets."
+        id: 'rhythm',
+        label: "Work Rhythm",
+        left: "Deep Focus (Async)",
+        right: "High Collaboration (Sync)",
+        defaultValue: 50,
     },
-
-    {
-        label: "MINDSET",
-        left: "Mercenary (Tech-First)",
-        right: "Missionary (Product-First)",
-        value: 90, // Strong Missionary focus
-        caption: "Filtered for candidates who care about the 'Why' behind the product, disqualifying those who only wanted to execute specs."
-    }
 ];
+
