@@ -69,7 +69,6 @@ export default function WaysOfWorking() {
     const [isActive, setIsActive] = useState(Array(count).fill(true));
     const [hasInteracted, setHasInteracted] = useState(Array(count).fill(false));
     const [copied, setCopied] = useState(false);
-    const [archetypeVisible, setArchetypeVisible] = useState(false);
     const archetypeKey = useRef(0);
     const prevHeadline = useRef('');
 
@@ -85,16 +84,12 @@ export default function WaysOfWorking() {
     const signalStrength = computeSignalStrength(values, isActive, hasInteracted);
     const archetype = buildArchetypeOutput(values, isActive, hasInteracted, equalizerData);
 
-    useEffect(() => {
-        if (archetype && archetype.headline !== prevHeadline.current) {
-            prevHeadline.current = archetype.headline;
-            archetypeKey.current += 1;
-            setArchetypeVisible(false);
-            const t = setTimeout(() => setArchetypeVisible(true), 50);
-            return () => clearTimeout(t);
-        }
-        if (!archetype) setArchetypeVisible(false);
-    }, [archetype]);
+    // Increment key when headline changes so CSS animation re-triggers
+    if (archetype && archetype.headline !== prevHeadline.current) {
+        prevHeadline.current = archetype.headline;
+        archetypeKey.current += 1;
+    }
+    if (!archetype) prevHeadline.current = '';
 
     const handleSliderChange = useCallback((index, newValue) => {
         setValues(prev => { const n = [...prev]; n[index] = newValue; return n; });
@@ -147,14 +142,6 @@ export default function WaysOfWorking() {
                 </p>
             </div>
 
-            {archetype && (
-                <div key={archetypeKey.current} className={`${styles.archetypePanel} ${archetypeVisible ? styles.archetypeVisible : ''}`}>
-                    <span className={styles.archetypeEyebrow}>Role Profile</span>
-                    <p className={styles.archetypeHeadline}>{archetype.headline}</p>
-                    <p className={styles.archetypeSummary}>{archetype.summary}</p>
-                </div>
-            )}
-
             <div className={styles.dashboardContainer}>
                 <div className={styles.dashboardContent}>
                     {equalizerData.map((item, index) => {
@@ -196,6 +183,14 @@ export default function WaysOfWorking() {
                     })}
                 </div>
             </div>
+
+            {archetype && (
+                <div key={archetypeKey.current} className={styles.archetypePanel}>
+                    <span className={styles.archetypeEyebrow}>Role Profile</span>
+                    <p className={styles.archetypeHeadline}>{archetype.headline}</p>
+                    <p className={styles.archetypeSummary}>{archetype.summary}</p>
+                </div>
+            )}
 
             <div className={styles.copyRow}>
                 <button
