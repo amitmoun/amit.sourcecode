@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from './WaysOfWorking.module.css';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import { equalizerData } from '@/lib/data';
 
 function computeSignalStrength(values, isActive, hasInteracted) {
@@ -69,7 +70,25 @@ export default function WaysOfWorking() {
     const [isActive, setIsActive] = useState(Array(count).fill(true));
     const [hasInteracted, setHasInteracted] = useState(Array(count).fill(false));
     const [copied, setCopied] = useState(false);
-    const archetypeKey = useRef(0);
+    const [expanded, setExpanded] = useState(false);
+    
+    // Hover spotlight effect
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    function handleMouseMove({ clientX, clientY, currentTarget }) {
+        const { left, top } = currentTarget.getBoundingClientRect();
+        mouseX.set(clientX - left);
+        mouseY.set(clientY - top);
+    }
+    const spotlightBackground = useMotionTemplate`
+        radial-gradient(
+            800px circle at ${mouseX}px ${mouseY}px,
+            rgba(168, 85, 247, 0.05),
+            transparent 80%
+        )
+    `;
+
+const archetypeKey = useRef(0);
     const prevHeadline = useRef('');
 
     useEffect(() => {
@@ -78,13 +97,13 @@ export default function WaysOfWorking() {
             setValues(decoded.values);
             setIsActive(decoded.isActive);
             setHasInteracted(decoded.hasInteracted);
+            setExpanded(true);
         }
     }, [count]);
 
     const signalStrength = computeSignalStrength(values, isActive, hasInteracted);
     const archetype = buildArchetypeOutput(values, isActive, hasInteracted, equalizerData);
 
-    // Increment key when headline changes so CSS animation re-triggers
     if (archetype && archetype.headline !== prevHeadline.current) {
         prevHeadline.current = archetype.headline;
         archetypeKey.current += 1;
@@ -111,98 +130,156 @@ export default function WaysOfWorking() {
 
     const confirmedCount = isActive.filter((a, i) => a && hasInteracted[i]).length;
     const activeCount = isActive.filter(Boolean).length;
+    const MIN_CONFIRMED = 3; // minimum axes to surface a role profile
+    const profileReady = confirmedCount >= MIN_CONFIRMED;
+
+    const profileNudge =
+        confirmedCount === 0 ? 'Move a slider to start calibrating.'
+        : confirmedCount === 1 ? 'One axis set. A role needs more than one dimension — keep going.'
+        : `${MIN_CONFIRMED - confirmedCount} more ${MIN_CONFIRMED - confirmedCount === 1 ? 'axis' : 'axes'} to surface a role profile.`;
     const barWidth = Math.min(signalStrength, 100);
 
-    const signalLabel =
+    const signalLabelClean =
         signalStrength === 0 ? 'Move a slider to begin calibrating'
-        : signalStrength < 40 ? 'Weak signal — brief too ambiguous to source against'
-        : signalStrength < 70 ? 'Moderate signal — calibration taking shape'
-        : signalStrength < 88 ? 'Strong signal — ready to source against'
-        : 'High precision — over-specification risk, consider relaxing one axis';
+        : signalStrength < 40 ? 'Weak signal. Brief too ambiguous to source against.'
+        : signalStrength < 70 ? 'Moderate signal. Calibration taking shape.'
+        : signalStrength < 88 ? 'Strong signal. Ready to source against.'
+        : 'High precision. Over-specification risk: consider relaxing one axis.';
 
     return (
         <section className={styles.section} id="calibration">
             <h2 className={styles.heading}>The Calibration Equalizer</h2>
             <p className={styles.subheading}>
-                Every role requires a different configuration. Activate the axes that matter,
-                move the sliders, and surface a precise hiring brief — shared in one link.
+                Set the dials for any open role. See the brief come into focus.
             </p>
 
-            <div className={styles.dashboardContainer}>
-                <div className={styles.dashboardContent}>
-                    {equalizerData.map((item, index) => {
-                        const active = isActive[index];
-                        const touched = hasInteracted[index];
-                        const val = values[index];
-                        return (
-                            <div key={item.id} className={`${styles.sliderContainer} ${active ? styles.sliderActive : styles.sliderDim}`}>
-                                <div className={styles.sliderHeader}>
-                                    <button
-                                        className={`${styles.toggle} ${active ? styles.toggleOn : ''}`}
-                                        onClick={() => handleToggle(index)}
-                                        aria-label={`${active ? 'Deactivate' : 'Activate'} ${item.label}`}
-                                    >
-                                        <span className={styles.toggleDot} />
-                                    </button>
-                                    <span className={`${styles.label} ${touched ? styles.labelTouched : ''}`}>
-                                        {item.label}
-                                        {touched && <span className={styles.confirmedDot} />}
-                                    </span>
+            {!expanded ? (
+                <div className={styles.previewWrapper}>
+                    <div className={styles.previewContent} aria-hidden="true">
+                        {equalizerData.slice(0, 3).map((item, index) => (
+                            <div key={item.id} className={styles.previewRow}>
+                                <span className={styles.previewLabel}>{item.left}</span>
+                                <div className={styles.previewTrack}>
+                                    <div className={styles.previewFill} style={{ width: `${defaults[index]}%` }} />
+                                    <div className={styles.previewThumb} style={{ left: `${defaults[index]}%` }} />
                                 </div>
-                                <div className={styles.trackWrapper}>
-                                    <span className={styles.trackLabelLeft}>{item.left}</span>
-                                    <div className={styles.track}>
-                                        <input
-                                            type="range" min="0" max="100" value={val}
-                                            disabled={!active}
-                                            onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
-                                            className={styles.rangeInput}
-                                            aria-label={item.label}
-                                        />
-                                        <div className={`${styles.fill} ${touched ? styles.fillTouched : ''}`} style={{ width: `${val}%` }} />
-                                        <div className={`${styles.thumb} ${touched ? styles.thumbTouched : ''}`} style={{ left: `${val}%` }} />
+                                <span className={styles.previewLabel}>{item.right}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <div className={styles.previewOverlay} />
+                    <button className={styles.expandBtn} onClick={() => setExpanded(true)}>
+                        Explore the Equalizer
+                        <span className={styles.expandArrow}>↓</span>
+                    </button>
+                </div>
+            ) : (
+                <>
+                    <motion.div 
+                        className={styles.dashboardContainer}
+                        onMouseMove={handleMouseMove}
+                        style={{ position: 'relative', overflow: 'hidden' }}
+                    >
+                        {/* Subtle Spotlight Overlay */}
+                        <motion.div
+                            className="spotlight-overlay"
+                            style={{
+                                pointerEvents: 'none',
+                                position: 'absolute',
+                                inset: 0,
+                                zIndex: 0,
+                                background: spotlightBackground
+                            }}
+                        />
+                        <div className={styles.dashboardContent}>
+                            {equalizerData.map((item, index) => {
+                                const active = isActive[index];
+                                const touched = hasInteracted[index];
+                                const val = values[index];
+                                return (
+                                    <div key={item.id} className={`${styles.sliderContainer} ${active ? styles.sliderActive : styles.sliderDim}`}>
+                                        <div className={styles.sliderHeader}>
+                                            <button
+                                                className={`${styles.toggle} ${active ? styles.toggleOn : ''}`}
+                                                onClick={() => handleToggle(index)}
+                                                aria-label={`${active ? 'Deactivate' : 'Activate'} ${item.label}`}
+                                            >
+                                                <span className={styles.toggleDot} />
+                                            </button>
+                                            <span className={`${styles.label} ${touched ? styles.labelTouched : ''}`}>
+                                                {item.label}
+                                                {active && touched && <span className={styles.confirmedDot} />}
+                                            </span>
+                                        </div>
+                                        <div className={styles.trackWrapper}>
+                                            <span className={styles.trackLabelLeft}>{item.left}</span>
+                                            <div className={styles.track}>
+                                                <input
+                                                    type="range" min="0" max="100" value={val}
+                                                    disabled={!active}
+                                                    onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
+                                                    className={styles.rangeInput}
+                                                    aria-label={item.label}
+                                                />
+                                                <div className={`${styles.fill} ${touched ? styles.fillTouched : ''}`} style={{ width: `${val}%` }} />
+                                                <div className={`${styles.thumb} ${touched ? styles.thumbTouched : ''}`} style={{ left: `${val}%` }} />
+                                            </div>
+                                            <span className={styles.trackLabelRight}>{item.right}</span>
+                                        </div>
                                     </div>
-                                    <span className={styles.trackLabelRight}>{item.right}</span>
+                                );
+                            })}
+                        </div>
+                    </motion.div>
+
+                    <div className={styles.resultsRow}>
+                        {profileReady && archetype ? (
+                            <div key={archetypeKey.current} className={styles.archetypePanel}>
+                                <span className={styles.archetypeEyebrow}>Role Profile</span>
+                                <p className={styles.archetypeHeadline}>{archetype.headline}</p>
+                                <p className={styles.archetypeSummary}>{archetype.summary}</p>
+                            </div>
+                        ) : (
+                            <div className={styles.nudgePanel}>
+                                <span className={styles.nudgeEyebrow}>Role Profile</span>
+                                <p className={styles.nudgeText}>{profileNudge}</p>
+                                <div className={styles.nudgeDots}>
+                                    {Array.from({ length: MIN_CONFIRMED }).map((_, i) => (
+                                        <span
+                                            key={i}
+                                            className={`${styles.nudgeDot} ${i < confirmedCount ? styles.nudgeDotFilled : ''}`}
+                                        />
+                                    ))}
                                 </div>
                             </div>
-                        );
-                    })}
-                </div>
-            </div>
+                        )}
+                        <div className={styles.signalWrapper}>
+                            <div className={styles.signalHeader}>
+                                <span className={styles.signalLabel}>Brief Clarity</span>
+                                <span className={styles.signalPct}>{Math.round(signalStrength)}%</span>
+                            </div>
+                            <div className={styles.signalTrack}>
+                                <div className={styles.signalBar} style={{ width: `${barWidth}%` }} />
+                            </div>
+                            <p className={styles.signalHint}>{signalLabelClean}</p>
+                            <p className={styles.signalMeta}>
+                                {confirmedCount} of {activeCount} active {activeCount === 1 ? 'axis' : 'axes'} confirmed
+                            </p>
+                        </div>
+                    </div>
 
-            <div className={styles.resultsRow}>
-                {archetype && (
-                    <div key={archetypeKey.current} className={styles.archetypePanel}>
-                        <span className={styles.archetypeEyebrow}>Role Profile</span>
-                        <p className={styles.archetypeHeadline}>{archetype.headline}</p>
-                        <p className={styles.archetypeSummary}>{archetype.summary}</p>
+                    <div className={styles.copyRow}>
+                        <button
+                            className={`${styles.copyBtn} ${copied ? styles.copyBtnSuccess : ''}`}
+                            onClick={handleCopyUrl}
+                            disabled={confirmedCount === 0}
+                        >
+                            {copied ? 'Link Copied' : 'Copy Brief Link'}
+                        </button>
+                        <span className={styles.copyHint}>Share this configuration with your hiring team</span>
                     </div>
-                )}
-                <div className={styles.signalWrapper}>
-                    <div className={styles.signalHeader}>
-                        <span className={styles.signalLabel}>Brief Clarity</span>
-                        <span className={styles.signalPct}>{Math.round(signalStrength)}%</span>
-                    </div>
-                    <div className={styles.signalTrack}>
-                        <div className={styles.signalBar} style={{ width: `${barWidth}%` }} />
-                    </div>
-                    <p className={styles.signalHint}>{signalLabel}</p>
-                    <p className={styles.signalMeta}>
-                        {confirmedCount} of {activeCount} active {activeCount === 1 ? 'axis' : 'axes'} confirmed
-                    </p>
-                </div>
-            </div>
-
-            <div className={styles.copyRow}>
-                <button
-                    className={`${styles.copyBtn} ${copied ? styles.copyBtnSuccess : ''}`}
-                    onClick={handleCopyUrl}
-                    disabled={confirmedCount === 0}
-                >
-                    {copied ? '✓ Link Copied' : 'Copy Brief Link'}
-                </button>
-                <span className={styles.copyHint}>Share this configuration with your hiring team</span>
-            </div>
+                </>
+            )}
         </section>
     );
 }

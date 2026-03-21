@@ -1,0 +1,347 @@
+/* ── Section ─────────────────────────────────────────────────────────────── */
+.section {
+    padding: 5rem 1rem;
+    background-color: #0a0a0a;
+    color: var(--foreground);
+}
+
+.heading {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    font-weight: 500;
+    color: #fff;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.03em;
+    text-align: center;
+}
+
+.subheading {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    font-size: 1.05rem;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+}
+
+/* ── Collapsed Preview ───────────────────────────────────────────────────── */
+.previewWrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.previewChart {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 1.5rem 2rem 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+.previewOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 110px;
+    background: linear-gradient(to bottom, transparent, #0a0a0a);
+    border-radius: 0 0 16px 16px;
+    pointer-events: none;
+}
+
+.expandBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.5rem auto 0;
+    padding: 0.65rem 1.75rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: 1px solid #7c3aed;
+    background: rgba(124, 58, 237, 0.08);
+    color: #c084fc;
+    cursor: pointer;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.expandBtn:hover {
+    background: rgba(124, 58, 237, 0.18);
+    box-shadow: 0 0 16px rgba(124, 58, 237, 0.25);
+}
+
+.expandArrow {
+    font-size: 0.9rem;
+    transition: transform 0.25s ease;
+}
+
+.expandBtn:hover .expandArrow {
+    transform: translateY(2px);
+}
+
+/* ── Dashboard ───────────────────────────────────────────────────────────── */
+.dashboard {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 2.5rem;
+    animation: fadeUp 0.4s ease both;
+}
+
+.dashboardTop {
+    display: flex;
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.metricsRow {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #222;
+}
+
+.metricsRow .readout {
+    flex: 1;
+}
+
+
+
+.metricsRow .readout {
+    flex: 1;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Left: Controls ──────────────────────────────────────────────────────── */
+.controls {
+    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.controlsHeading {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #aaa;
+}
+
+/* Slider */
+.sliderRow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sliderMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.sliderLabel {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.sliderSublabel {
+    font-size: 0.72rem;
+    color: var(--muted);
+}
+
+.sliderTrackWrap {
+    position: relative;
+    user-select: none;
+    -webkit-user-drag: none;
+    height: 4px;
+    background: #1e1e1e;
+    border-radius: 2px;
+}
+
+.sliderInput {
+    position: absolute;
+    user-select: none;
+    -webkit-user-drag: none;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 32px;
+    opacity: 0;
+    cursor: grab;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+}
+
+.sliderInput:active { cursor: grabbing; }
+
+.sliderFill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #7c3aed;
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(192, 132, 252, 0.4);
+    transition: width 0.08s ease;
+}
+
+.sliderThumb {
+    position: absolute;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    background: #1a1a1a;
+    border: 2px solid #c084fc;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    transition: left 0.08s ease;
+    box-shadow: 0 0 8px rgba(192, 132, 252, 0.5);
+}
+
+.sliderValue {
+    font-size: 0.75rem;
+    color: #666;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Readouts */
+.readouts {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.readout {
+    flex: 1;
+    background: #0d0d0d;
+    border: 1px solid #222;
+    border-radius: 10px;
+    padding: 0.75rem 0.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.readoutValue {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #e2e2e2;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.3s;
+}
+
+.readoutLabel {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    line-height: 1.3;
+}
+
+.burnoutWarning {
+    font-size: 0.8rem;
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 8px;
+    padding: 0.6rem 0.85rem;
+    line-height: 1.5;
+}
+
+/* ── Right: Chart ────────────────────────────────────────────────────────── */
+.chartPanel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.chartTitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #aaa;
+    margin: 0;
+}
+
+.chartSublabel {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin: 0;
+}
+
+.chartFootnote {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    line-height: 1.5;
+}
+
+/* ── Tooltip ─────────────────────────────────────────────────────────────── */
+.tooltip {
+    background: #161616;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.tooltipLabel {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.tooltipValue {
+    font-size: 0.9rem;
+    color: #c084fc;
+    font-weight: 500;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+    .dashboard {
+        flex-direction: column;
+    }
+    .controls {
+        flex: unset;
+        width: 100%;
+    }
+}
+
+    details > summary::-webkit-details-marker {
+        display: none;
+    }

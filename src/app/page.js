@@ -1,7 +1,9 @@
 import styles from "./page.module.css";
 import SourcingSuperpowers from "@/components/SourcingSuperpowers";
-import CaseStudy from "@/components/CaseStudy";
 import WaysOfWorking from "@/components/WaysOfWorking";
+import CandidateExperience from "@/components/CandidateExperience";
+import EasterEggCTA from "@/components/EasterEggCTA";
+import CaseStudy from "@/components/CaseStudy";
 import Contact from "@/components/Contact";
 import AIChat from "@/components/AIChat";
 
@@ -16,16 +18,16 @@ export default function Home() {
             <span className={styles.muted}>BY DESIGN.</span>
           </h1>
           <p className={styles.subtitle}>
-            Talent Architect focused on velocity and precision. With a CS background and data-driven methodology,
-            I translate complex technical roadmaps into scalable hiring strategies. Beyond simply filling seats,
-            I engineer high-velocity pipelines, sync capacity with product roadmaps, and build distributed teams that ship.
+            Talent Architect focused on velocity, calibration, and operational efficiency. With a CS background, I approach Talent Acquisition as an engineering problem. I build data-driven hiring models that pinpoint upstream calibration leakage before it burns downstream engineering hours. I don't just fill funnels; I engineer high-velocity pipelines, balance TA capacity with product roadmaps, and build distributed teams that actually ship.
           </p>
         </div>
       </section>
 
       <SourcingSuperpowers />
-      <CaseStudy />
+      <CandidateExperience />
       <WaysOfWorking />
+      <EasterEggCTA />
+      <CaseStudy />
       <Contact />
       <AIChat />
     </main>
