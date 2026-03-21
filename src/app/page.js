@@ -17,9 +17,17 @@ export default function Home() {
             BUILDING TEAMS <br />
             <span className={styles.muted}>BY DESIGN.</span>
           </h1>
-          <p className={styles.subtitle}>
-            Talent Architect focused on velocity, calibration, and operational efficiency. With a CS background, I approach Talent Acquisition as an engineering problem. I build data-driven hiring models that pinpoint upstream calibration leakage before it burns downstream engineering hours. I don't just fill funnels; I engineer high-velocity pipelines, balance TA capacity with product roadmaps, and build distributed teams that actually ship.
-          </p>
+          <div className={styles.subtitle} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', textWrap: 'pretty' }}>
+            <p>
+              Talent Architect focused on velocity, calibration, and operational efficiency. With a CS background, I approach Talent Acquisition as an engineering problem.
+            </p>
+            <p>
+              I build data-driven hiring models that pinpoint upstream calibration leakage before it burns downstream engineering hours.
+            </p>
+            <p>
+              I don't just fill funnels; I engineer high-velocity pipelines, balance TA capacity with product roadmaps, and build distributed teams that actually ship.
+            </p>
+          </div>
         </div>
       </section>
 
