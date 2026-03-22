@@ -2,7 +2,6 @@ import styles from "./page.module.css";
 import SourcingSuperpowers from "@/components/SourcingSuperpowers";
 import WaysOfWorking from "@/components/WaysOfWorking";
 import CandidateExperience from "@/components/CandidateExperience";
-import EasterEggCTA from "@/components/EasterEggCTA";
 import CaseStudy from "@/components/CaseStudy";
 import Contact from "@/components/Contact";
 import AIChat from "@/components/AIChat";
@@ -26,7 +25,6 @@ export default function Home() {
       <SourcingSuperpowers />
       <CandidateExperience />
       <WaysOfWorking />
-      <EasterEggCTA />
       <CaseStudy />
       <Contact />
       <AIChat />
