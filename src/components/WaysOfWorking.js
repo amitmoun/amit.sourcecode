@@ -67,7 +67,7 @@ export default function WaysOfWorking() {
     const defaults = equalizerData.map(ax => ax.defaultValue);
 
     const [values, setValues] = useState(defaults);
-    const [isActive, setIsActive] = useState(Array(count).fill(true));
+    const [isActive, setIsActive] = useState(Array(count).fill(false));
     const [hasInteracted, setHasInteracted] = useState(Array(count).fill(false));
     const [copied, setCopied] = useState(false);
     const [expanded, setExpanded] = useState(false);
