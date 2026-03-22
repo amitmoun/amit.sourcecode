@@ -113,6 +113,7 @@ const archetypeKey = useRef(0);
     const handleSliderChange = useCallback((index, newValue) => {
         setValues(prev => { const n = [...prev]; n[index] = newValue; return n; });
         setHasInteracted(prev => { const n = [...prev]; n[index] = true; return n; });
+        setIsActive(prev => { const n = [...prev]; n[index] = true; return n; });
     }, []);
 
     const handleToggle = useCallback((index) => {

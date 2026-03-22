@@ -19,7 +19,7 @@ const FEEDBACK_OPTIONS = {
 };
 
 /* ── Core Math ───────────────────────────────────────────────────────────── */
-function calcMetrics(qualityPct, turnaround, feedbackKey) {
+function calcMetrics(qualityPct, turnaround, feedbackKey, takeHomeHours = 4) {
     const q = qualityPct / 100;
     const totalVolume = q === 0 ? 0 : TARGET_HIRES / q;
     
@@ -49,10 +49,15 @@ function calcMetrics(qualityPct, turnaround, feedbackKey) {
     if (turnaround > 3) {
         slaPenaltyFactor = Math.max(0, 1 - ((turnaround - 3) * 0.15));
     }
+
+    const extraHours = Math.max(0, takeHomeHours - 5);
+    const takeHomeMultiplier = Math.max(0, 1 - (extraHours * 0.15));
     
-    const finalCXIndex = Math.round(rawScore * slaPenaltyFactor);
+    const finalCXIndex = Math.round(rawScore * slaPenaltyFactor * takeHomeMultiplier);
     
-    const offerDropoffRisk = Math.min(100, 5 + (Math.max(0, turnaround - 3) * 15));
+    const turnaroundRisk = Math.max(0, turnaround - 3) * 15;
+    const takeHomeRisk = extraHours * 10;
+    const offerDropoffRisk = Math.min(100, 5 + turnaroundRisk + takeHomeRisk);
     
     const burnout = availableCXTime < 0;
     const burnoutDeficit = burnout ? Math.abs(Math.round(availableCXTime)) : 0;
@@ -71,10 +76,10 @@ function calcMetrics(qualityPct, turnaround, feedbackKey) {
 }
 
 /* ── Chart Data ──────────────────────────────────────────────────────────── */
-function buildChartData(turnaround, feedbackKey) {
+function buildChartData(turnaround, feedbackKey, takeHomeHours = 4) {
     return Array.from({ length: 19 }, (_, i) => {
         const q = (i + 2) * 5;
-        const { finalCXIndex } = calcMetrics(q, turnaround, feedbackKey);
+        const { finalCXIndex } = calcMetrics(q, turnaround, feedbackKey, takeHomeHours);
         return { quality: q, cxIndex: finalCXIndex };
     });
 }
@@ -222,12 +227,13 @@ function NestedAccordion({ number, title, children }) {
 export default function CandidateExperience() {
     const [quality, setQuality]   = useState(75);
     const [turnaround, setTurnaround] = useState(2);
+    const [takeHomeHours, setTakeHomeHours] = useState(4);
     const [feedback, setFeedback] = useState('High-Touch');
     const [expanded, setExpanded] = useState(false);
     const [methodologyOpen, setMethodologyOpen] = useState(false);
 
-    const metrics   = calcMetrics(quality, turnaround, feedback);
-    const chartData = buildChartData(turnaround, feedback);
+    const metrics   = calcMetrics(quality, turnaround, feedback, takeHomeHours);
+    const chartData = buildChartData(turnaround, feedback, takeHomeHours);
 
     const cxColor =
         metrics.finalCXIndex >= 70 ? '#a855f7'
@@ -262,7 +268,7 @@ export default function CandidateExperience() {
                 <div className={styles.previewWrapper}>
                     <div className={styles.previewChart} aria-hidden="true">
                         <ResponsiveContainer width="100%" height={160}>
-                            <LineChart data={buildChartData(3, 'Stage-Gated')} margin={{ top: 10, right: 20, bottom: 0, left: 0 }}>
+                            <LineChart data={buildChartData(3, 'Stage-Gated', 4)} margin={{ top: 10, right: 20, bottom: 0, left: 0 }}>
                                 <Line
                                     type="monotone"
                                     dataKey="cxIndex"
