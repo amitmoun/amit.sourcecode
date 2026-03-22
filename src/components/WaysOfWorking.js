@@ -215,7 +215,7 @@ const archetypeKey = useRef(0);
                                             <div className={styles.track}>
                                                 <input
                                                     type="range" min="0" max="100" value={val}
-                                                    disabled={!active}
+                                                    
                                                     onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
                                                     className={styles.rangeInput}
                                                     aria-label={item.label}
