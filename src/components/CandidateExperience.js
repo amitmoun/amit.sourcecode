@@ -388,7 +388,19 @@ export default function CandidateExperience() {
                                 </YAxis>
                                 <Tooltip content={<CXTooltip />} />
                                 <ReferenceArea x1={10} x2={25} fill="#ef4444" fillOpacity={0.15}>
-                                    <Label value="BURNOUT ZONE (0% CX)" position="insideTopLeft" offset={10} fill="#ef4444" fillOpacity={0.7} style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em' }} />
+                                    <Label 
+                                        position="insideTopLeft" 
+                                        content={(props) => {
+                                            const { viewBox } = props;
+                                            return (
+                                                <text x={viewBox.x + 8} y={viewBox.y + 16} fill="#ef4444" fontSize="10" fontWeight="bold" letterSpacing="0.05em">
+                                                    <tspan x={viewBox.x + 8} dy="0">BURNOUT</tspan>
+                                                    <tspan x={viewBox.x + 8} dy="14">ZONE</tspan>
+                                                    <tspan x={viewBox.x + 8} dy="14">(0% CX)</tspan>
+                                                </text>
+                                            );
+                                        }} 
+                                    />
                                 </ReferenceArea>
                                 <ReferenceLine x={quality} stroke="#444" strokeDasharray="3 3" />
                                 <ReferenceDot x={quality} y={metrics.finalCXIndex} r={5} fill="#a855f7" stroke="#fff" strokeWidth={2} isFront={true} />
