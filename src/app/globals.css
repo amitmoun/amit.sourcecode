@@ -67,3 +67,17 @@ h1, h2, h3, h4, h5, h6 {
 section {
   animation: fadeInUp 0.8s ease-out forwards;
 }
+
+
+.pulse-glow-force {
+    background-color: #a855f7 !important;
+    box-shadow: 0 0 15px 4px rgba(168, 85, 247, 0.4) !important;
+    animation: forceGlow 2.5s infinite ease-in-out !important;
+    border: 2px solid white !important;
+}
+
+@keyframes forceGlow {
+    0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px 2px rgba(168, 85, 247, 0.2); }
+    50% { transform: translate(-50%, -50%) scale(1.4); box-shadow: 0 0 25px 8px rgba(168, 85, 247, 0.8); }
+    100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px 2px rgba(168, 85, 247, 0.2); }
+}

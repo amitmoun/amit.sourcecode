@@ -221,7 +221,7 @@ const archetypeKey = useRef(0);
                                                     aria-label={item.label}
                                                 />
                                                 <div className={`${styles.fill} ${touched ? styles.fillTouched : ''}`} style={{ width: `${val}%` }} />
-                                                <div className={`${styles.thumb} ${touched ? styles.thumbTouched : ''} ${!active ? styles.thumbGlow : ''}`} style={{ left: `${val}%` }} />
+                                                <div className={`${styles.thumb} ${touched ? styles.thumbTouched : ''} ${!active ? 'pulse-glow-force' : ''}`} style={{ left: `${val}%` }} />
                                             </div>
                                             <span className={styles.trackLabelRight}>{item.right}</span>
                                         </div>
