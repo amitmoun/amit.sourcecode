@@ -311,7 +311,7 @@ export default function CandidateExperience() {
                             max={100}
                         />
                         <ControlSlider
-                            label="Hiring Manager"
+                            label="Hiring Team"
                             sublabel="Turnaround (Days)"
                             value={turnaround}
                             onChange={setTurnaround}
