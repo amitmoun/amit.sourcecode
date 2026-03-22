@@ -308,9 +308,7 @@
     pointer-events: all;
 }
 
-.sliderDim .rangeInput {
-    pointer-events: none;
-}
+
 
 .sliderActive:hover {
     background: rgba(255, 255, 255, 0.03);
