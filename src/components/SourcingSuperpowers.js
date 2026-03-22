@@ -47,7 +47,7 @@ function SuperpowerCard({ power }) {
                         }}
                     />
 
-                    <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', width: '100%' }}>
                         <div className={styles.icon}>{iconMap[power.iconName]}</div>
                         <h3 className={styles.cardTitle}>{power.title}</h3>
                         <div className={styles.tapHint}>Hover to Flip</div>

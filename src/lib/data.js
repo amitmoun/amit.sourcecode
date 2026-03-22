@@ -1,13 +1,13 @@
 
 export const superpowers = [
     {
-        title: "Predictive Demand Modeling",
+        title: "Capacity & Demand Planning",
         iconName: "TrendingUp",
         description: "Move from reactive filling to proactive planning. I analyze your growth velocity to forecast headcount needs and pipeline readiness before the bottleneck hits.",
         tags: ["Forecasting", "Capacity Planning", "Velocity"]
     },
     {
-        title: "Generative Sourcing Infrastructure",
+        title: "AI-Powered Sourcing Engine",
         iconName: "Cpu",
         description: "An always-on search engine powered by AI agents. I surface high-quality, diverse candidates from fragmented channels that traditional sourcing misses.",
         tags: ["AI Agents", "Automated Outreach", "Passive Talent"]
@@ -19,13 +19,13 @@ export const superpowers = [
         tags: ["Market Intel", "Comp Benchmarking", "Competitive Advantage"]
     },
     {
-        title: "Unified Data Integrity",
+        title: "Predictive Hiring Analytics",
         iconName: "Database",
         description: "A single source of truth. I sanitize and centralize all hiring data—eliminating blind spots and ensuring audit-ready reporting for the leadership team.",
         tags: ["Data Hygiene", "Reporting", "Single Source of Truth"]
     },
     {
-        title: "Experience Architecture",
+        title: "CX Architecture",
         iconName: "Users",
         description: "Recruiting is built on human connection. I design frictionless, transparent experiences that delight candidates and empower hiring managers.",
         tags: ["UX Design", "Candidate Experience", "Process Flow"]
@@ -231,54 +231,12 @@ export const intakeStrategy = [
 ];
 
 export const equalizerData = [
-    {
-        id: 'execution',
-        label: "Execution Bias",
-        left: "Ships and Iterates",
-        right: "Architected First",
-        defaultValue: 50,
-    },
-    {
-        id: 'stage',
-        label: "System Stage",
-        left: "Builds from Scratch",
-        right: "Scales What Exists",
-        defaultValue: 50,
-    },
-    {
-        id: 'problem',
-        label: "Problem Definition",
-        left: "Requires Structured Parameters",
-        right: "Navigates High Ambiguity",
-        defaultValue: 50,
-    },
-    {
-        id: 'mindset',
-        label: "Cognitive Mindset",
-        left: "Craft-Driven",
-        right: "Outcome-Driven",
-        defaultValue: 50,
-    },
-    {
-        id: 'depth',
-        label: "Technical Depth",
-        left: "Wide Range of Skills",
-        right: "Deep in One Domain",
-        defaultValue: 50,
-    },
-    {
-        id: 'influence',
-        label: "Influence Model",
-        left: "Builds Consensus",
-        right: "Drives Decisions",
-        defaultValue: 50,
-    },
-    {
-        id: 'rhythm',
-        label: "Work Rhythm",
-        left: "Deep Focus (Async)",
-        right: "High Collaboration (Sync)",
-        defaultValue: 50,
-    },
+    { id: 'stage', label: "System Stage", left: "Builds from Scratch", right: "Scales What Exists", defaultValue: 50 },
+    { id: 'problem', label: "Problem Definition", left: "Requires Structured Parameters", right: "Navigates High Ambiguity", defaultValue: 50 },
+    { id: 'execution', label: "Execution Bias", left: "Ships and Iterates", right: "Architected First", defaultValue: 50 },
+    { id: 'depth', label: "Technical Depth", left: "Wide Range of Skills", right: "Deep in One Domain", defaultValue: 50 },
+    { id: 'mindset', label: "Cognitive Mindset", left: "Craft-Driven", right: "Outcome-Driven", defaultValue: 50 },
+    { id: 'influence', label: "Influence Model", left: "Builds Consensus", right: "Drives Decisions", defaultValue: 50 },
+    { id: 'rhythm', label: "Work Rhythm", left: "Deep Focus (Async)", right: "High Collaboration (Sync)", defaultValue: 50 },
 ];
 

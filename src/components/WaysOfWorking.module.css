@@ -592,3 +592,14 @@
     border-color: #a855f7;
     box-shadow: 0 0 6px rgba(124, 58, 237, 0.5);
 }
+
+
+.thumbGlow {
+    box-shadow: 0 0 15px 4px rgba(168, 85, 247, 0.4);
+    animation: pulseGlow 2.5s infinite ease-in-out;
+}
+@keyframes pulseGlow {
+    0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px 2px rgba(168, 85, 247, 0.3); }
+    50% { transform: translate(-50%, -50%) scale(1.15); box-shadow: 0 0 20px 8px rgba(168, 85, 247, 0.6); }
+    100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px 2px rgba(168, 85, 247, 0.3); }
+}

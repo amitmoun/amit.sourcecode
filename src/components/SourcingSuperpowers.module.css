@@ -5,12 +5,23 @@
 }
 
 .heading {
-    font-size: 2.5rem;
-    margin-bottom: 4rem;
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    font-weight: 500;
+    color: #fff;
+    margin: 0 0 3.5rem 0;
+    letter-spacing: -0.03em;
     text-align: center;
-    font-weight: 300;
-    letter-spacing: -0.02em;
-    color: var(--foreground);
+}
+
+.subheading {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    font-size: 1.05rem;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .grid {

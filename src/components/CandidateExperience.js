@@ -220,9 +220,9 @@ function NestedAccordion({ number, title, children }) {
 }
 
 export default function CandidateExperience() {
-    const [quality, setQuality]   = useState(30);
-    const [turnaround, setTurnaround] = useState(3);
-    const [feedback, setFeedback] = useState('Stage-Gated');
+    const [quality, setQuality]   = useState(75);
+    const [turnaround, setTurnaround] = useState(2);
+    const [feedback, setFeedback] = useState('High-Touch');
     const [expanded, setExpanded] = useState(false);
     const [methodologyOpen, setMethodologyOpen] = useState(false);
 
@@ -254,7 +254,7 @@ export default function CandidateExperience() {
         <section className={styles.section} id="cx-index">
             <h2 className={styles.heading}>The Candidate Experience Index</h2>
             <p className={styles.subheading}>
-                Quality of hire shapes recruiter capacity. See how pipeline yield maps to candidate care.
+                Candidate experience isn't an empathy problem; it's a math problem. See exactly how upstream calibration leakage destroys downstream capacity.
             </p>
 
             {!expanded ? (
@@ -275,8 +275,7 @@ export default function CandidateExperience() {
                     </div>
                     <div className={styles.previewOverlay} />
                     <button className={styles.expandBtn} onClick={() => setExpanded(true)}>
-                        Run the Model
-                        <span className={styles.expandArrow}>↓</span>
+                        Calibrate a Role
                     </button>
                 </div>
             ) : (

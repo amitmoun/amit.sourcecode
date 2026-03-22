@@ -169,8 +169,7 @@ const archetypeKey = useRef(0);
                     </div>
                     <div className={styles.previewOverlay} />
                     <button className={styles.expandBtn} onClick={() => setExpanded(true)}>
-                        Explore the Equalizer
-                        <span className={styles.expandArrow}>↓</span>
+                        Calibrate a Role
                     </button>
                 </div>
             ) : (
@@ -222,7 +221,7 @@ const archetypeKey = useRef(0);
                                                     aria-label={item.label}
                                                 />
                                                 <div className={`${styles.fill} ${touched ? styles.fillTouched : ''}`} style={{ width: `${val}%` }} />
-                                                <div className={`${styles.thumb} ${touched ? styles.thumbTouched : ''}`} style={{ left: `${val}%` }} />
+                                                <div className={`${styles.thumb} ${touched ? styles.thumbTouched : ''} ${!active ? styles.thumbGlow : ''}`} style={{ left: `${val}%` }} />
                                             </div>
                                             <span className={styles.trackLabelRight}>{item.right}</span>
                                         </div>
