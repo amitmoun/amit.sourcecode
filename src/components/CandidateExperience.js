@@ -275,7 +275,7 @@ export default function CandidateExperience() {
                     </div>
                     <div className={styles.previewOverlay} />
                     <button className={styles.expandBtn} onClick={() => setExpanded(true)}>
-                        Calibrate a Role
+                        Run the Model
                     </button>
                 </div>
             ) : (
