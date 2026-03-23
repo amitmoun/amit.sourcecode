@@ -30,7 +30,7 @@
 }
 
 .subheading {
-    font-family: var(--font-sans);
+    font-family: var(--font-inter);
     font-size: 1.1rem;
     color: #a3a3a3;
     font-weight: 300;
@@ -162,7 +162,7 @@
 
 .impactTag {
     display: inline-block;
-    font-family: var(--font-sans);
+    font-family: var(--font-inter);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -189,7 +189,7 @@
     flex-direction: column;
     gap: 0.5rem;
     /* Tighter gap */
-    font-family: var(--font-sans);
+    font-family: var(--font-inter);
     font-size: 0.9rem;
     /* Slightly smaller for density */
     color: #d4d4d4;
@@ -219,7 +219,7 @@
 }
 
 .impactMetric {
-    font-family: var(--font-sans);
+    font-family: var(--font-inter);
     font-size: 1rem;
     color: #fff;
     font-weight: 500;
@@ -292,7 +292,7 @@
 }
 
 .modalSection h4 {
-    font-family: var(--font-sans);
+    font-family: var(--font-inter);
     font-size: 0.8rem;
     text-transform: uppercase;
     color: #666;
@@ -304,7 +304,7 @@
 }
 
 .modalSection p {
-    font-family: var(--font-sans);
+    font-family: var(--font-inter);
     font-size: 1.15rem;
     line-height: 1.6;
     color: #eaeaea;
