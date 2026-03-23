@@ -228,6 +228,7 @@ export default function CandidateExperience() {
     const [quality, setQuality]   = useState(75);
     const [turnaround, setTurnaround] = useState(2);
     const [takeHomeHours, setTakeHomeHours] = useState(4);
+    const [takeHomeHours, setTakeHomeHours] = useState(4);
     const [feedback, setFeedback] = useState('High-Touch');
     const [expanded, setExpanded] = useState(false);
     const [methodologyOpen, setMethodologyOpen] = useState(false);
@@ -326,6 +327,14 @@ export default function CandidateExperience() {
                             step={1}
                             suffix="d"
                         />
+
+                            <ControlSlider
+                                label="Candidate Time Invested"
+                                sublabel="Total Loop + Assignment (Hours)"
+                                value={takeHomeHours}
+                                onChange={setTakeHomeHours}
+                                min={1} max={15} step={1} suffix="h"
+                            />
 
                         <div className={styles.segmentedControl}>
                             <p className={styles.sliderLabel} style={{ marginBottom: '0.5rem' }}>
