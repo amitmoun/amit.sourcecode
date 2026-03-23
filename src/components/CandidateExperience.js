@@ -228,7 +228,6 @@ export default function CandidateExperience() {
     const [quality, setQuality]   = useState(75);
     const [turnaround, setTurnaround] = useState(2);
     const [takeHomeHours, setTakeHomeHours] = useState(4);
-    const [takeHomeHours, setTakeHomeHours] = useState(4);
     const [feedback, setFeedback] = useState('High-Touch');
     const [expanded, setExpanded] = useState(false);
     const [methodologyOpen, setMethodologyOpen] = useState(false);
@@ -330,7 +329,7 @@ export default function CandidateExperience() {
 
                             <ControlSlider
                                 label="Candidate Time Invested"
-                                sublabel="Total Loop + Assignment (Hours)"
+                                sublabel="Total Interview Time (Hours)"
                                 value={takeHomeHours}
                                 onChange={setTakeHomeHours}
                                 min={1} max={15} step={1} suffix="h"
