@@ -341,17 +341,16 @@ export default function CandidateExperience() {
                             </p>
                             <div className={styles.segmentedButtons} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                 {[
-                                    { value: 'Automated', title: 'None', desc: 'Automated templates only' },
-                                    { value: 'Stage-Gated', title: 'Business Interviewed Candidates', desc: 'Custom feedback' },
-                                    { value: 'High-Touch', title: 'All Candidates', desc: '100% custom feedback' }
+                                    { value: 'Automated', title: 'None' },
+                                    { value: 'Stage-Gated', title: 'Post-Screen' },
+                                    { value: 'High-Touch', title: 'All Candidates' }
                                 ].map(opt => (
                                     <button
                                         key={opt.value}
                                         onClick={() => setFeedback(opt.value)}
                                         style={{
                                             flex: 1,
-                                            padding: '0.6rem 0.5rem',
-                                            paddingLeft: '0.75rem',
+                                            padding: '0.5rem 0.75rem',
                                             background: feedback === opt.value ? 'rgba(168, 85, 247, 0.15)' : 'transparent',
                                             color: feedback === opt.value ? '#fff' : '#a3a3a3',
                                             border: feedback === opt.value ? '1px solid #a855f7' : '1px solid #333',
@@ -359,12 +358,11 @@ export default function CandidateExperience() {
                                             textAlign: 'left',
                                             cursor: 'pointer',
                                             transition: 'all 0.2s',
+                                            fontSize: '0.85rem',
+                                            fontWeight: feedback === opt.value ? 600 : 400,
                                         }}
                                     >
-                                        <strong style={{ display: 'block', marginBottom: '0.2rem', color: feedback === opt.value ? '#fff' : '#eaeaea', fontSize: '0.9rem' }}>{opt.title}</strong>
-                                        <span style={{ fontSize: '0.8rem', opacity: feedback === opt.value ? 1 : 0.7 }}>
-                                            {opt.desc}
-                                        </span>
+                                        {opt.title}
                                     </button>
                                 ))}
                             </div>
@@ -378,7 +376,7 @@ export default function CandidateExperience() {
                     </div>
 
                     {/* Right: Chart */}
-                    <div className={styles.chartPanel} style={{ position: 'relative', zIndex: 1, flex: 1, minWidth: 0 }}>
+                    <div className={styles.chartPanel} style={{ position: 'relative', zIndex: 1, flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                         <p className={styles.chartTitle}>CX Index across quality spectrum</p>
                         <ResponsiveContainer width="100%" height={380}>
                             <LineChart data={chartData} margin={{ top: 20, right: 10, bottom: 20, left: 10 }}>
@@ -503,9 +501,16 @@ export default function CandidateExperience() {
                             >
                                 <div style={{ padding: '0 2rem 1.5rem 2rem', borderTop: '1px solid #1a1a1a', paddingTop: '1.5rem' }}>
                     
+                    <div style={{ background: 'rgba(168, 85, 247, 0.06)', border: '1px solid rgba(168, 85, 247, 0.2)', borderRadius: '10px', padding: '1rem 1.25rem', marginBottom: '1.5rem' }}>
+                        <p style={{ color: '#a855f7', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '0.72rem', marginBottom: '0.5rem' }}>Baseline Assumption</p>
+                        <p style={{ color: '#a3a3a3', lineHeight: 1.7, fontSize: '0.88rem' }}>
+                            This model simulates a single hiring cycle targeting <strong style={{color:'#eaeaea'}}>5 open roles</strong> and a recruiter with a <strong style={{color:'#eaeaea'}}>40-hour monthly capacity</strong>. These are illustrative constants — the ratios of pipeline waste, CX decay, and drop-off risk scale proportionally regardless of absolute headcount.
+                        </p>
+                    </div>
+
                     <NestedAccordion number="1" title="The Engineering Tax (Why Pipeline Quality dictates capacity)">
                         <p style={{ marginBottom: '0.5rem', color: '#a855f7', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '0.75rem' }}>The Core Insight</p>
-                        <p style={{ marginBottom: '1.2rem', color: '#a3a3a3', lineHeight: 1.6, fontSize: '0.9rem' }}>Every candidate who fails a late-stage onsite loop doesn't just hurt recruiter capacity; they burn expensive engineering roadmap time.</p>
+                        <p style={{ marginBottom: '1.2rem', color: '#a3a3a3', lineHeight: 1.6, fontSize: '0.9rem' }}>Every candidate who fails a late-stage onsite loop doesn't just hurt recruiter capacity; it uses up engineering hours with no result.</p>
                         
                         <p style={{ marginBottom: '0.5rem', color: '#a855f7', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '0.75rem' }}>The Assumption</p>
                         <ul style={{ paddingLeft: '1.2rem', marginBottom: '1.5rem', color: '#a3a3a3', listStyleType: 'circle', lineHeight: 1.6, fontSize: '0.9rem' }}>
