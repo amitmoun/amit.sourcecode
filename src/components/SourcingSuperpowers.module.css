@@ -153,6 +153,7 @@
 }
 
 .cardTitle {
+    font-family: var(--font-inter);
     font-size: 1.1rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -163,6 +164,7 @@
 }
 
 .tapHint {
+    font-family: var(--font-inter);
     margin-top: auto;
     font-size: 0.75rem;
     color: #555;
@@ -182,6 +184,7 @@
 }
 
 .cardDescription {
+    font-family: var(--font-inter);
     font-size: 0.95rem;
     line-height: 1.5;
     color: #ddd;
@@ -196,6 +199,7 @@
 }
 
 .tag {
+    font-family: var(--font-inter);
     font-size: 0.7rem;
     padding: 0.3rem 0.6rem;
     background: rgba(255, 255, 255, 0.1);
